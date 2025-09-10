@@ -38,7 +38,8 @@ const corsOptions = {
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:3000',
-      'https://intelli-personal.vercel.app'
+      'https://intelli-personal.vercel.app',
+      'https://intelli-personal-q6dqc08ny-papan-namasudras-projects.vercel.app'
     ];
 
     if (allowedOrigins.indexOf(origin) !== -1) {
