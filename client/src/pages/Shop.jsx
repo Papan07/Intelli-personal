@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaHeart, FaCheckCircle, FaSearch, FaInfoCircle } from "react-icons/fa";
+import { FaHeart, FaCheckCircle, FaSearch, FaInfoCircle, FaFilter } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useWishlistSidebar } from "../context/WishlistSidebarContext";
@@ -644,6 +644,7 @@ const Shop = () => {
   const [selectedCategories, setSelectedCategories] = useState(["All Categories"]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("recommended");
+  const [showFilters, setShowFilters] = useState(false);
 
   // Database products state
   const [dbProducts, setDbProducts] = useState([]);
@@ -850,16 +851,24 @@ const Shop = () => {
       className="h-screen bg-gray-100 w-full p-0 overflow-hidden"
     >
       <div className="w-full h-full flex flex-col">
-        <h1 className="text-4xl font-bold mb-2 px-8 pt-8">Shop Products</h1>
-        <p className="text-gray-500 text-lg mb-6 px-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 px-4 md:px-8 pt-8">Shop Products</h1>
+        <p className="text-gray-500 text-md md:text-lg mb-6 px-4 md:px-8">
           Browse our collection of products and find exactly what you are looking for
         </p>
 
-        
+        <div className="md:hidden px-4 mb-4">
+          <button 
+            onClick={() => setShowFilters(!showFilters)}
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            <FaFilter />
+            <span>Filters</span>
+          </button>
+        </div>
 
-        <div className="flex gap-6 px-8 flex-1 overflow-hidden">
+        <div className="flex gap-6 px-4 md:px-8 flex-1 overflow-hidden">
           {/* Filters */}
-          <aside className="bg-white rounded-xl shadow p-6 w-64 h-full overflow-y-auto">
+          <aside className={`${showFilters ? 'block' : 'hidden'} md:block bg-white rounded-xl shadow p-6 w-full md:w-64 h-full overflow-y-auto`}>
             <h2 className="text-xl font-semibold mb-4">Filters</h2>
             <div>
               <h3 className="font-medium mb-2">Categories</h3>
@@ -893,8 +902,8 @@ const Shop = () => {
           {/* Product List */}
           <main className="flex-1 overflow-y-auto">
             {/* Search and Sort */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="relative flex-1">
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+              <div className="relative flex-1 w-full">
                 <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
@@ -907,7 +916,7 @@ const Shop = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-white rounded-xl px-6 py-3 pr-10 shadow font-medium text-lg outline-none cursor-pointer"
+                className="w-full md:w-auto bg-white rounded-xl px-6 py-3 pr-10 shadow font-medium text-lg outline-none cursor-pointer"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                   backgroundPosition: 'right 12px center',

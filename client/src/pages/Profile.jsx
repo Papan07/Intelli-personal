@@ -305,11 +305,11 @@ const Profile = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="container mx-auto px-4 py-8">
         {/* Profile Header */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
             {/* Profile Picture */}
             <div className="relative">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+              <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
                 {(user.username || user.displayName || 'U').charAt(0).toUpperCase()}
               </div>
 
@@ -317,16 +317,16 @@ const Profile = () => {
 
             {/* Profile Info */}
             <div className="flex-1 text-center md:text-left">
-              <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4">
                 {isEditing ? (
                   <input
                     type="text"
                     value={editedUser.username}
                     onChange={(e) => handleInputChange('username', e.target.value)}
-                    className="text-3xl font-bold text-gray-800 bg-gray-100 px-3 py-2 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-500"
+                    className="text-2xl md:text-3xl font-bold text-gray-800 bg-gray-100 px-3 py-2 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-500"
                   />
                 ) : (
-                  <h1 className="text-3xl font-bold text-gray-800">
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
                     {user.username || user.displayName}
                   </h1>
                 )}
@@ -362,7 +362,7 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-4 text-gray-600 mb-4">
+              <div className="flex flex-col md:flex-row gap-2 md:gap-4 text-gray-600 mb-4">
                 <div className="flex items-center gap-2">
                   <FaEnvelope className="text-blue-500" />
                   {isEditing ? (
@@ -437,7 +437,7 @@ const Profile = () => {
             {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-300 flex items-center gap-2 shadow-lg"
+              className="bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold hover:from-red-600 hover:to-red-700 transition-all duration-300 flex items-center gap-2 shadow-lg mt-4 md:mt-0"
             >
               <FaSignOutAlt />
               Logout
@@ -465,7 +465,7 @@ const Profile = () => {
         )}
 
         {/* Profile Information Summary */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 mb-8">
           <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
             <FaUserCircle className="text-blue-500" />
             Profile Information
@@ -565,7 +565,7 @@ const Profile = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl p-6 shadow-lg">
             <div className="flex items-center gap-4">
               <div className="bg-blue-100 p-3 rounded-lg">
@@ -617,8 +617,8 @@ const Profile = () => {
 
         {/* Tab Navigation */}
         <div className="bg-white rounded-2xl shadow-2xl mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="flex space-x-8 px-8">
+          <div className="border-b border-gray-200 overflow-x-auto">
+            <nav className="flex space-x-4 md:space-x-8 px-4 md:px-8">
               {[
                 { id: 'overview', label: 'Overview', icon: FaChartLine },
                 { id: 'orders', label: 'Orders', icon: FaShoppingBag },
@@ -628,7 +628,7 @@ const Profile = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                  className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${
                     activeTab === tab.id
                       ? 'border-blue-500 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -642,7 +642,7 @@ const Profile = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="p-8">
+          <div className="p-4 md:p-8">
             {activeTab === 'overview' && (
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Account Overview</h3>
@@ -701,21 +701,21 @@ const Profile = () => {
 
             {activeTab === 'orders' && (
               <div className="space-y-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center">
-                      <FaShoppingBag className="text-white text-lg" />
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-3 mb-4 md:mb-0">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center">
+                      <FaShoppingBag className="text-gray-700 text-lg" />
                     </div>
                     Order History
                   </h3>
-                  <div className="text-sm text-gray-300">
+                  <div className="text-sm text-gray-600">
                     {orders.length} {orders.length === 1 ? 'order' : 'orders'} found
                   </div>
                 </div>
                 {ordersLoading ? (
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 text-center border border-gray-700">
-                    <FaSpinner className="text-4xl text-gray-300 mx-auto mb-4 animate-spin" />
-                    <p className="text-gray-300">Loading your orders...</p>
+                  <div className="bg-gray-50 rounded-xl p-8 text-center border border-gray-200">
+                    <FaSpinner className="text-4xl text-gray-400 mx-auto mb-4 animate-spin" />
+                    <p className="text-gray-500">Loading your orders...</p>
                   </div>
                 ) : orders.length === 0 ? (
                   <div className="bg-gray-50 p-8 rounded-xl text-center">
@@ -737,11 +737,11 @@ const Profile = () => {
                       const StatusIcon = statusInfo.icon;
 
                       return (
-                        <div key={order._id} className="bg-white rounded-xl shadow-lg p-6">
-                          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                        <div key={order._id} className="bg-white rounded-xl shadow-lg p-4 md:p-6">
+                          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div className="flex-1">
-                              <div className="flex items-center space-x-4 mb-4">
-                                <div className="flex-1">
+                              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div className="mb-4 md:mb-0">
                                   <h4 className="text-lg font-semibold text-gray-800">
                                     Order #{order.tracking.orderNumber}
                                   </h4>
@@ -757,8 +757,8 @@ const Profile = () => {
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center space-x-6">
+                              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <div className="flex items-center space-x-4 md:space-x-6 mb-4 md:mb-0">
                                   <div>
                                     <p className="text-sm text-gray-600">Items</p>
                                     <p className="font-semibold">{order.products.length} item{order.products.length > 1 ? 's' : ''}</p>
@@ -767,14 +767,10 @@ const Profile = () => {
                                     <p className="text-sm text-gray-600">Total Amount</p>
                                     <p className="font-semibold text-lg">₹{order.pricing.totalAmount}</p>
                                   </div>
-                                  <div>
-                                    <p className="text-sm text-gray-600">Payment Method</p>
-                                    <p className="font-semibold capitalize">{order.payment.method}</p>
-                                  </div>
                                 </div>
                                 <button
                                   onClick={() => viewOrderDetails(order)}
-                                  className="flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-700 transition"
+                                  className="flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-700 transition w-full md:w-auto"
                                 >
                                   <FaEye className="mr-2" />
                                   View Details
@@ -813,7 +809,7 @@ const Profile = () => {
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Your Wishlist</h3>
                 {wishlistItems.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {wishlistItems.slice(0, 6).map((item, index) => (
                       <div key={index} className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-shadow">
                         <img
@@ -885,7 +881,7 @@ const Profile = () => {
 
       {/* Photo Upload Modal */}
       {showPhotoModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
             <h3 className="text-xl font-bold text-gray-800 mb-4">Change Profile Photo</h3>
 

@@ -204,7 +204,7 @@ const Home = () => {
         <img
           src={banners[index].image}
           alt={banners[index].alt}
-          className="banner-image w-full h-[550px] object-cover"
+          className="banner-image w-full h-[300px] md:h-[550px] object-cover"
         />
         <button className="arrow left" onClick={goPrev}>
           &#10094;
@@ -234,24 +234,24 @@ const Home = () => {
       </div>
 
       {/* ✅ Categories */}
-      <section className="max-w-7xl mx-auto px-4 mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Shop by Category</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-4 md:gap-6">
           {categories.map((cat) => (
             <Link
               to={`/shop?category=${encodeURIComponent(cat.name)}`}
               key={cat.name}
               className="flex flex-col items-center bg-white rounded-xl shadow p-4 hover:bg-blue-50 transition"
             >
-              <span className="text-4xl mb-2">{cat.icon}</span>
-              <span className="font-medium text-gray-700">{cat.name}</span>
+              <span className="text-3xl md:text-4xl mb-2">{cat.icon}</span>
+              <span className="font-medium text-center text-sm md:text-base text-gray-700">{cat.name}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* ✅ Featured Products */}
-      <section className="max-w-7xl mx-auto px-4 mb-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Featured Products</h2>
           <Link
@@ -261,7 +261,7 @@ const Home = () => {
             View all <FaArrowRight className="ml-1" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {featuredProducts.map((product, idx) => (
             <div
               key={idx}
@@ -314,9 +314,9 @@ const Home = () => {
 
       {/* ✅ App Features Showcase */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Experience Smart Shopping
             </h2>
             <p className="text-gray-300 text-lg">
@@ -425,7 +425,7 @@ const Home = () => {
       </section>
 
       {/* ✅ Newsletter */}
-      <section className="bg-white py-12 px-4">
+      <section className="bg-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center">
           <h3 className="text-2xl font-bold mb-2 text-gray-800">Stay Updated!</h3>
           <p className="text-gray-600 mb-6">
@@ -450,7 +450,7 @@ const Home = () => {
 
       {/* ✅ Enhanced Footer */}
       <footer className="bg-gray-900 text-gray-200 py-12 mt-12">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             {/* Company Info */}

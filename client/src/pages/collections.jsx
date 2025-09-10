@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/collections.css";
 import ChatbotFloat from "../components/ChatbotFloat";
 
 const categories = [
@@ -75,79 +74,80 @@ export default function Collections() {
   };
 
   return (
-    <div className="collections-container">
-      <div className="header-section">
-        <button onClick={() => navigate(-1)} className="back-arrow-btn" title="Go back">
-          ←
-        </button>
-        <h1 className="section-title">Collections</h1>
-      </div>
-      <p className="section-subtitle">
-        Explore our wide range of products across different categories, curated for quality and style
-      </p>
+    <div className="bg-gray-100 min-h-screen">
+      <div className="p-4 md:p-8">
+        <div className="flex items-center mb-4">
+          <button onClick={() => navigate(-1)} className="text-gray-600 hover:text-gray-800" title="Go back">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </button>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mx-auto">Collections</h1>
+        </div>
+        <p className="text-center text-gray-600 mb-8">
+          Explore our wide range of products across different categories, curated for quality and style
+        </p>
 
-      <div className="category-grid">
-        {categories.map((item, idx) => {
-          // Map category titles to their dedicated page routes
-          const getRouteForCategory = (title) => {
-            switch (title) {
-              case "Fashions":
-                return "/fashion";
-              case "Electronics":
-                return "/electronics";
-              case "Watches":
-                return "/watches";
-              case "Footwear":
-                return "/footwear";
-              case "Home decor":
-                return "/home-decor";
-              case "Books":
-                return "/books";
-              case "Kitchen":
-                return "/kitchen";
-              case "Sports":
-                return "/sports";
-              default:
-                return `/shop?category=${encodeURIComponent(title)}`;
-            }
-          };
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {categories.map((item, idx) => {
+            const getRouteForCategory = (title) => {
+              switch (title) {
+                case "Fashions":
+                  return "/fashion";
+                case "Electronics":
+                  return "/electronics";
+                case "Watches":
+                  return "/watches";
+                case "Footwear":
+                  return "/footwear";
+                case "Home decor":
+                  return "/home-decor";
+                case "Books":
+                  return "/books";
+                case "Kitchen":
+                  return "/kitchen";
+                case "Sports":
+                  return "/sports";
+                default:
+                  return `/shop?category=${encodeURIComponent(title)}`;
+              }
+            };
 
-          return (
-            <Link
-              key={idx}
-              to={getRouteForCategory(item.title)}
-              className="category-card"
-            >
-              <img src={item.image} alt={item.title} />
-              <div className="category-label">
-                <h4>{item.title}</h4>
-                <p>{item.products}</p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      <h2 className="section-title">Feature collections</h2>
-      <div className="featured-grid">
-        {featured.map((item, idx) => (
-          <div className="featured-card" key={idx}>
-            <img src={item.image} alt={item.title} />
-            <div className="featured-info">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <button
-                className={`btn-${item.buttonColor}`}
-                onClick={() => handleFeatureClick(item.title)}
+            return (
+              <Link
+                key={idx}
+                to={getRouteForCategory(item.title)}
+                className="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300"
               >
-                {item.buttonText}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+                <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h4 className="text-lg font-semibold text-gray-800">{item.title}</h4>
+                  <p className="text-gray-600 text-sm">{item.products}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
 
-      {/* ✅ Floating Chatbot */}
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8">Feature collections</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {featured.map((item, idx) => (
+            <div className="bg-white rounded-lg shadow-md overflow-hidden" key={idx}>
+              <img src={item.image} alt={item.title} className="w-full h-64 object-cover" />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h3>
+                <p className="text-gray-600 mb-4">{item.description}</p>
+                <button
+                  className={`w-full py-2 px-4 rounded-lg font-semibold text-white ${item.buttonColor === 'primary' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700'}`}
+                  onClick={() => handleFeatureClick(item.title)}
+                >
+                  {item.buttonText}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <ChatbotFloat />
     </div>
   );

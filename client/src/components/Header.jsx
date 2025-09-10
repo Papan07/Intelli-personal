@@ -9,6 +9,7 @@ import {
   FaMicrophoneSlash,
   FaCog,
   FaChevronDown,
+  FaBars,
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
@@ -30,6 +31,8 @@ const Header = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   // Voice search hook
   const {
@@ -153,21 +156,21 @@ const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between px-8 py-4 shadow bg-white sticky top-0 z-50 w-full">
+    <header className="flex items-center justify-between px-4 md:px-8 py-4 shadow bg-white sticky top-0 z-50 w-full">
       {/* Left: Logo */}
       <div className="flex items-center">
-        <Link to="/" className="text-3xl font-bold flex items-center">
+        <Link to="/" className="text-xl md:text-3xl font-bold flex items-center">
           <img
             src="https://png.pngtree.com/png-clipart/20241120/original/pngtree-creative-design-shopping-cart-icon-png-image_17269496.png"
             alt="IntelliBazar Logo"
-            className="w-10 h-10 mr-2"
+            className="w-8 h-8 md:w-10 md:h-10 mr-2"
           />
           IntelliBazar
         </Link>
       </div>
 
       {/* Center: Nav */}
-      <nav className="flex space-x-8 mx-12">
+      <nav className="hidden md:flex space-x-8 mx-12">
         <Link to="/" className="font-medium">Home</Link>
         <Link to="/shop" className="font-medium">Shop</Link>
         <Link to="/collections" className="font-medium">Collections</Link>
@@ -176,8 +179,80 @@ const Header = () => {
         <Link to="/Shorts" className="font-medium">Shorts</Link>
       </nav>
 
+      {/* Mobile Icons */}
+      <div className="md:hidden flex items-center space-x-5">
+        <button onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)} className="text-xl">
+          <FaSearch />
+        </button>
+        <button onClick={openWishlistSidebar} className="text-xl relative">
+          <FaHeart />
+          {wishlistCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {wishlistCount}
+            </span>
+          )}
+        </button>
+        <button onClick={openCartSidebar} className="text-xl relative">
+          <FaShoppingCart />
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </button>
+        {user ? (
+            <Link to="/profile" className="text-xl">
+                <FaUserCircle />
+            </Link>
+        ) : (
+            <Link to="/login" className="text-sm font-medium">Login</Link>
+        )}
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-xl">
+          <FaBars />
+        </button>
+      </div>
+
+      {/* Mobile Search Bar */}
+      {isMobileSearchOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden p-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+              onKeyDown={handleKeyDown}
+              className="w-full rounded-full px-4 py-2 pr-10 shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Search products"
+              autoComplete="off"
+            />
+            <button
+              onClick={handleSearch}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600 transition"
+              aria-label="Search"
+            >
+              <FaSearch />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-lg md:hidden">
+          <nav className="flex flex-col items-center space-y-4 py-4">
+            <Link to="/" className="font-medium">Home</Link>
+            <Link to="/shop" className="font-medium">Shop</Link>
+            <Link to="/collections" className="font-medium">Collections</Link>
+            <Link to="/about" className="font-medium">About</Link>
+            <Link to="/Chat" className="font-medium">Chat</Link>
+            <Link to="/Shorts" className="font-medium">Shorts</Link>
+          </nav>
+        </div>
+      )}
+
       {/* Right: Search and Icons */}
-      <div className="flex items-center space-x-5">
+      <div className="hidden md:flex items-center space-x-5">
         <div className="flex items-center space-x-3">
           <button
             onClick={handleVoiceSearch}
