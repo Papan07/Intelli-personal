@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem("token");
 
         if (token) {
-          const res = await axios.get("http://localhost:8080/api/auth/me", {
+          const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/me`, {
             headers: { Authorization: `Bearer ${token}` },
             withCredentials: true, // For Google login
           });

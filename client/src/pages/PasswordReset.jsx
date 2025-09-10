@@ -28,7 +28,7 @@ const PasswordReset = () => {
 
     const verifyToken = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/auth/verify-reset-token?token=${token}`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/verify-reset-token?token=${token}`);
         setTokenValid(response.ok);
       } catch (error) {
         console.error("Token verification error:", error);
@@ -107,7 +107,7 @@ const PasswordReset = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/reset-password", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

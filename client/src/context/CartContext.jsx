@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // API base URL
-  const API_BASE_URL = "http://localhost:8080/api/cart";
+  const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/cart`;
 
   // Get auth headers
   const getAuthHeaders = () => {

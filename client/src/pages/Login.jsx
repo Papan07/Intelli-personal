@@ -25,7 +25,7 @@ const Login = () => {
   }, [location.state]);
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/api/auth/google";
+    window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
   };
 
   const handleChange = (e) => {
@@ -52,7 +52,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/login", formData, {
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, formData, {
         withCredentials: true,
       });
 
@@ -60,7 +60,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
 
       // ✅ Fetch the user and set in context
-      const userRes = await axios.get("http://localhost:8080/api/auth/me", {
+      const userRes = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/me`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${res.data.token}`, // if your backend uses token header

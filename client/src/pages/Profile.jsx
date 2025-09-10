@@ -73,7 +73,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:8080/api/auth/logout", {
+      await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/logout`, {
         withCredentials: true,
       });
 
@@ -123,7 +123,7 @@ const Profile = () => {
       };
 
       const response = await axios.put(
-        "http://localhost:8080/api/auth/profile",
+        `${import.meta.env.VITE_API_BASE_URL}/auth/profile`,
         profileData,
         {
           headers: {

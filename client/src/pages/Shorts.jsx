@@ -36,7 +36,7 @@ const Shorts = () => {
   const fetchVideos = async (category = 'all') => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:8080/api/videos`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/videos`, {
         params: { category, limit: 50 }
       });
 
@@ -196,7 +196,7 @@ const Shorts = () => {
 
   const incrementViewCount = async (videoId) => {
     try {
-      await axios.post(`http://localhost:8080/api/videos/${videoId}/view`);
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/videos/${videoId}/view`);
     } catch (err) {
       console.error('Error incrementing view count:', err);
     }
@@ -210,7 +210,7 @@ const Shorts = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/videos/${videoId}/like`,
+        `${import.meta.env.VITE_API_BASE_URL}/videos/${videoId}/like`,
         {},
         {
           headers: {

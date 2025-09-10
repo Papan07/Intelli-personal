@@ -116,7 +116,7 @@ const VideoUploadModal = ({ isOpen, onClose, onUploadSuccess }) => {
       });
 
       const response = await axios.post(
-        'http://localhost:8080/api/videos/upload',
+        `${import.meta.env.VITE_API_BASE_URL}/videos/upload`,
         uploadData,
         {
           headers: {

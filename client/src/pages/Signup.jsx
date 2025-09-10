@@ -19,7 +19,7 @@ const Signup = () => {
   const [passwordStrength, setPasswordStrength] = useState(0);
 
   const handleGoogleSignup = () => {
-    window.location.href = "http://localhost:8080/api/auth/google";
+    window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
   };
 
   const calculatePasswordStrength = (password) => {
@@ -88,7 +88,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/signup", {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
